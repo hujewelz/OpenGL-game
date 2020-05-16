@@ -11,7 +11,7 @@ class SpriteRenderer
 public:
     SpriteRenderer(Shader &shader);
     ~SpriteRenderer();
-    void Render();
+    void Render(Texture2D &texture /*, vec*/);
 
 private:
     Shader shader_;

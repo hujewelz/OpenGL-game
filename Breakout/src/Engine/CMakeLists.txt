@@ -9,10 +9,11 @@ add_library(Beetle
 )
 
 target_include_directories(Beetle 
-    PUBLIC
+    PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Shader/
     ${CMAKE_CURRENT_SOURCE_DIR}/Sprite/
     ${CMAKE_CURRENT_SOURCE_DIR}/Texture/
+    ${CMAKE_CURRENT_SOURCE_DIR}/Vendored/glm/
     ${CMAKE_CURRENT_SOURCE_DIR}/Vendored/stb_image/
     PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Scene/

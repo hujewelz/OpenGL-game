@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "resourcemanager.hpp"
+#include "texture.hpp"
 
 // Create SpriteRender
 SpriteRenderer *sprite_render_;
@@ -71,5 +72,7 @@ void Window::Update() {}
 
 void Window::Render()
 {
-    sprite_render_->Render();
+    // TODO: Load text form sprite
+    Texture2D texture = ResourceManager::GetTexture2D("Demo");
+    sprite_render_->Render(texure);
 }

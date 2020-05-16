@@ -14,15 +14,13 @@ SpriteRenderer::~SpriteRenderer()
     glDeleteVertexArrays(1, &this->VAO_);
 }
 
-void SpriteRenderer::Render()
+void SpriteRenderer::Render(Texture2D &texture)
 {
     this->shader_.Use();
 
     glActiveTexture(GL_TEXTURE0);
 
-    // TODO: Load text form sprite
-    Texture2D tex = ResourceManager::GetTexture2D("Demo");
-    tex.Bind();
+    texture.Bind();
     glBindVertexArray(this->VAO_);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
