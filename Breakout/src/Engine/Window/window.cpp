@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-Window::Window(int width, int height, const char *title) : width_(width), height_(height_), title_(title)
+Window::Window(int width, int height, const char *title) : width_(width), height_(height), title_(title)
 {
 }
 
@@ -47,12 +47,13 @@ void Window::Init()
     // -----------
     while (!glfwWindowShouldClose(window))
     {
-        // input
-        // -----
+        glfwPollEvents();
         // ProcessInput(window);
 
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
         glfwSwapBuffers(window);
-        glfwPollEvents();
     }
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
