@@ -2,6 +2,10 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "resourcemanager.hpp"
+
+// Create SpriteRender
+SpriteRenderer *sprite_render_;
 
 Window::Window(int width, int height, const char *title) : width_(width), height_(height), title_(title)
 {
@@ -9,6 +13,7 @@ Window::Window(int width, int height, const char *title) : width_(width), height
 
 Window::~Window()
 {
+    delete sprite_render_;
 }
 
 void Window::Init()
@@ -43,8 +48,11 @@ void Window::Init()
         return;
     }
 
+    Shader shader = ResourceManager::CreateShader("Resources/core.vs", "Resources/core.fs", "Breakout");
+    sprite_render_ = new SpriteRenderer(shader);
+    Texture2D t = ResourceManager::CreateTexture2D("./Resources/demo.jpg", false, "Demo");
+
     // render loop
-    // -----------
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
@@ -52,7 +60,7 @@ void Window::Init()
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-
+        this->Render();
         glfwSwapBuffers(window);
     }
 
@@ -60,4 +68,8 @@ void Window::Init()
     glfwTerminate();
 }
 void Window::Update() {}
-void Window::Render() {}
+
+void Window::Render()
+{
+    sprite_render_->Render();
+}

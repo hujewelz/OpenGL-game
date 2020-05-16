@@ -2,6 +2,7 @@
 #define WINDOW_H
 
 #include <GL/glew.h>
+#include "spriterenderer.hpp"
 
 class Window
 {
@@ -21,6 +22,7 @@ private:
     int width_;
     int height_;
     const char *title_;
+    static SpriteRenderer *sprite_renderer_;
 };
 
 #endif
