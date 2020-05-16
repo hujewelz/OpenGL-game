@@ -20,6 +20,7 @@ Scene::~Scene()
 void Scene::Init()
 {
     Shader shader = ResourceManager::CreateShader("./Resources/core.vs", "./Resources/core.fs", "Breakout");
+    shader.Use();
     render = new SpriteRenderer(shader);
 
     // crate all texture form sprites
