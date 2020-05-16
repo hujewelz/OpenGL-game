@@ -5,6 +5,5 @@ set(CMAKE_CXX_STATNARD 11)
 
 add_executable(Breakout main.cpp)
 
-add_subdirectory(lib/glapp)
-add_subdirectory(lib/image)
-target_link_libraries(Breakout glapp image)
+add_subdirectory(src/Engine)
+target_link_libraries(Breakout Beetle)
