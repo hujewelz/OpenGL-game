@@ -9,6 +9,8 @@ Shader::Shader(const char *vShaderPath, const char *fShaderPath)
     LinkShader(vShaderPath, fShaderPath);
 }
 
+Shader::Shader() {}
+
 Shader::~Shader()
 {
     glDeleteProgram(program_);
@@ -73,7 +75,7 @@ GLuint Shader::CompileSharder(const char *shaderpath, GLenum type)
     std::string sCode;
     std::ifstream shaderFile;
     shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-    // std::cout << "SHAPER PATH:" << shaderpath << std::endl;
+    std::cout << "SHAPER PATH:" << shaderpath << std::endl;
     try
     {
         // open the file

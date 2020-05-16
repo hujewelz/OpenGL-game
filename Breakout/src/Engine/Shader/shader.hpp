@@ -6,6 +6,7 @@
 class Shader
 {
 public:
+    Shader();
     Shader(const char *vShaderPath, const char *fShaderPath);
     ~Shader();
     void Use();
