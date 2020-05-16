@@ -1,20 +1,23 @@
 #include "window.hpp"
+
 #include <iostream>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+
 #include "resourcemanager.hpp"
 #include "texture.hpp"
 
-// Create SpriteRender
-SpriteRenderer *sprite_render_;
-
-Window::Window(int width, int height, const char *title) : width_(width), height_(height), title_(title)
+Window::Window(int width, int height, const char *title)
+    : width_(width), height_(height), title_(title)
 {
 }
 
 Window::~Window()
 {
-    delete sprite_render_;
+}
+
+void Window::RunScene(Scene &scene)
+{
+    this->scene_ = scene;
+    this->Init();
 }
 
 void Window::Init()
@@ -49,15 +52,14 @@ void Window::Init()
         return;
     }
 
-    Shader shader = ResourceManager::CreateShader("Resources/core.vs", "Resources/core.fs", "Breakout");
-    sprite_render_ = new SpriteRenderer(shader);
-    Texture2D t = ResourceManager::CreateTexture2D("./Resources/demo.jpg", false, "Demo");
+    // TODO: Add Scene
+    this->scene_.Init();
 
     // render loop
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-        // ProcessInput(window);
+        this->ProcessInput(window);
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -68,11 +70,15 @@ void Window::Init()
     // glfw: terminate, clearing all previously allocated GLFW resources.
     glfwTerminate();
 }
-void Window::Update() {}
+void Window::Update()
+{
+}
+
+void Window::ProcessInput(GLFWwindow *window)
+{
+}
 
 void Window::Render()
 {
-    // TODO: Load text form sprite
-    Texture2D texture = ResourceManager::GetTexture2D("Demo");
-    sprite_render_->Render(texure);
+    this->scene_.Render();
 }
