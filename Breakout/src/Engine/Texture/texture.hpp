@@ -11,6 +11,8 @@ public:
     // binds the texture as the current active GL_TEXTURE_2D texture object
     void Bind() const;
 
+    GLuint GetID() { return this->ID_; }
+
     // return the format of texture object
     unsigned int GetInternalFormat() { return this->internal_format_; }
     // return the format of loaded image
