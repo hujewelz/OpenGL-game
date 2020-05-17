@@ -18,10 +18,9 @@ Sprite::~Sprite() {}
 
 void Sprite::LoadTexture(Shader &shader)
 {
-    shader.Use();
-    Texture2D t = ResourceManager::CreateTexture2D(file_name_.c_str(), false, "Demo");
-    shader.SetVector3f("SpriteColor", 1.0f, 0.0f, 0.0f);
-    //  Texture2D texture =
+    // shader.Use();
+    ResourceManager::CreateTexture2D(file_name_.c_str(), false, "Demo");
+    shader.SetVector3f("spriteColor", 1.0f, 0.0f, 0.0f);
 }
 
 Texture2D Sprite::GetTexture()
