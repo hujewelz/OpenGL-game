@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 SpriteRenderer::SpriteRenderer(Shader &shader)
 {
     this->shader_ = shader;
@@ -14,13 +17,14 @@ SpriteRenderer::~SpriteRenderer()
     glDeleteVertexArrays(1, &this->VAO_);
 }
 
-void SpriteRenderer::Render(Texture2D &texture)
+void SpriteRenderer::Render(Sprite &sprite)
 {
     this->shader_.Use();
+    glm::mat4 model = glm::mat4(1.0f);
+    // model = glm::translate(model, glm::vec3(sprite.GetPosition().x, sprite.GetPosition().y, 0.0f));
 
     glActiveTexture(GL_TEXTURE0);
-
-    texture.Bind();
+    sprite.GetTexture().Bind();
     glBindVertexArray(this->VAO_);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);

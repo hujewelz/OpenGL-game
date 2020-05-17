@@ -4,14 +4,15 @@
 #include <GL/glew.h>
 
 #include "shader.hpp"
-#include "texture.hpp"
+#include "sprite.hpp"
+#include "vec.hpp"
 
 class SpriteRenderer
 {
 public:
     SpriteRenderer(Shader &shader);
     ~SpriteRenderer();
-    void Render(Texture2D &texture);
+    void Render(Sprite &sprite);
 
 private:
     Shader shader_;
