@@ -1,10 +1,10 @@
 #version 330 core
-in lowp vec2 tex_Coords;
+in lowp vec2 TexCoords;
 out lowp vec4 FragColor;
 
-uniform sampler2D Texture;
-uniform vec3 SpriteColor;
+uniform sampler2D image;
+uniform vec3 spriteColor;
 
 void main() {
-  FragColor = vec4(SpriteColor, 1.0) * texture(Texture, tex_Coords);
+  FragColor = vec4(spriteColor, 1.0) * texture(image, TexCoords);
 }
