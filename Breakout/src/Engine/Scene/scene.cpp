@@ -17,21 +17,31 @@ Scene::~Scene()
     delete render;
 }
 
+void Scene::AddChild(const Sprite &sprite)
+{
+    this->children.push_back(sprite);
+}
+
 void Scene::Init()
 {
+
     Shader shader = ResourceManager::CreateShader("./Resources/core.vs", "./Resources/core.fs", "Breakout");
     shader.Use();
     render = new SpriteRenderer(shader);
 
-    // crate all texture form sprites
-    ResourceManager::CreateTexture2D("./Resources/demo.jpg", false, "Demo");
-
-    shader.SetVector3f("SpriteColor", 1.0f, 0.0f, 0.0f);
+    // TODO: create all texture form sprites
+    for (Sprite &sprite : children)
+    {
+        sprite.LoadTexture(shader);
+    }
+    shader.SetInt("image", 0);
 }
 
 void Scene::Render()
 {
     // TODO: Load text form sprites
-    Texture2D texture = ResourceManager::GetTexture2D("Demo");
-    render->Render(texture);
+    for (Sprite &sprite : children)
+    {
+        render->Render(sprite);
+    }
 }
