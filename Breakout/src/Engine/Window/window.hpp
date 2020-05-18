@@ -15,8 +15,8 @@ public:
 
     void RunScene(Scene &scene);
 
-    int GetWidth() { return width_; }
-    int GetHeight() { return height_; }
+    int GetWidth() const { return width_; }
+    int GetHeight() const { return height_; }
 
 private:
     int width_;

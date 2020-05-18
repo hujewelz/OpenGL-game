@@ -23,7 +23,7 @@ void Sprite::LoadTexture(Shader &shader)
     shader.SetVector3f("spriteColor", 1.0f, 0.0f, 0.0f);
 }
 
-Texture2D Sprite::GetTexture()
+Texture2D Sprite::GetTexture() const
 {
     return ResourceManager::GetTexture2D("Demo");
 }

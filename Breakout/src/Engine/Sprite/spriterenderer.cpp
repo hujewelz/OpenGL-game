@@ -9,7 +9,7 @@
 SpriteRenderer::SpriteRenderer(Shader &shader)
 {
     this->shader_ = shader;
-    this->init();
+    this->Init();
 }
 
 SpriteRenderer::~SpriteRenderer()
@@ -21,6 +21,7 @@ void SpriteRenderer::Render(Sprite &sprite)
 {
     this->shader_.Use();
     glm::mat4 model = glm::mat4(1.0f);
+    // TODO: set model and projection for shader
     // model = glm::translate(model, glm::vec3(sprite.GetPosition().x, sprite.GetPosition().y, 0.0f));
 
     glActiveTexture(GL_TEXTURE0);
@@ -30,7 +31,7 @@ void SpriteRenderer::Render(Sprite &sprite)
     glBindVertexArray(0);
 }
 
-void SpriteRenderer::init()
+void SpriteRenderer::Init()
 {
     float vertices[] = {
         // pos      // tex

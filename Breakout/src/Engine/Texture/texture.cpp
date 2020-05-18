@@ -7,7 +7,7 @@ Texture2D::Texture2D()
     glGenTextures(1, &this->ID_);
 }
 
-void Texture2D::Generate(int width, int height, unsigned char *data)
+void Texture2D::Generate(int width, int height, const unsigned char *data)
 {
     this->width_ = width;
     this->height_ = height;

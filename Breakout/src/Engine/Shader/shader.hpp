@@ -11,7 +11,7 @@ public:
     ~Shader();
     void Use();
 
-    GLuint GetProgram() { return program_; }
+    GLuint GetProgram() const { return program_; }
 
     // utility functions
     void SetInt(const char *name, int value, bool useShader = false);

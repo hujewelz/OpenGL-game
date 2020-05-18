@@ -19,7 +19,7 @@ Shader ResourceManager::GetShader(const std::string name)
     return shaders_[name];
 }
 
-Texture2D ResourceManager::CreateTexture2D(const char *file, bool alpha, std::string name)
+Texture2D ResourceManager::CreateTexture2D(const char *file, bool alpha, const std::string name)
 {
     Texture2D t = loadTextureFromFile(file, alpha);
     textures_[name] = t;

@@ -13,7 +13,7 @@ class ResourceManager
 {
 public:
     // create a shader program from file
-    static Shader CreateShader(const char *vShaderPath, const char *fShaderPath, std::string name);
+    static Shader CreateShader(const char *vShaderPath, const char *fShaderPath, const std::string name);
     // retrieves a stored shader
     static Shader GetShader(const std::string name);
 
