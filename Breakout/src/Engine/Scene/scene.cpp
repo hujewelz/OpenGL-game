@@ -14,7 +14,7 @@ Scene::~Scene()
 
 void Scene::AddChild(const Sprite &sprite)
 {
-    this->children_.push_back(sprite);
+    children_.push_back(sprite);
 }
 
 void Scene::Init()

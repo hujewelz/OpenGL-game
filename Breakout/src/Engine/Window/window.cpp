@@ -53,17 +53,17 @@ void Window::Init()
     }
 
     // TODO: Add Scene
-    this->scene_.Init();
+    scene_.Init();
 
     // render loop
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-        this->ProcessInput(window);
+        ProcessInput(window);
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        this->Render();
+        Render();
         glfwSwapBuffers(window);
     }
 
@@ -80,5 +80,5 @@ void Window::ProcessInput(GLFWwindow *window)
 
 void Window::Render()
 {
-    this->scene_.Render();
+    scene_.Render();
 }
