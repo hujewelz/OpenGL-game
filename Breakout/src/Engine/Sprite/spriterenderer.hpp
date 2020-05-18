@@ -17,7 +17,7 @@ public:
 private:
     Shader shader_;
     GLuint VAO_;
-    void init();
+    void Init();
 };
 
 #endif
