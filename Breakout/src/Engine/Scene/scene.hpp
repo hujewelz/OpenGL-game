@@ -10,7 +10,6 @@
 class Scene
 {
 public:
-    static Scene *Create();
     Scene();
     ~Scene();
 
@@ -23,8 +22,8 @@ public:
     void AddChild(const Sprite &sprite);
 
 private:
-    SpriteRenderer *render;
-    std::vector<Sprite> children;
+    SpriteRenderer *renderer_;
+    std::vector<Sprite> children_;
 };
 
 #endif

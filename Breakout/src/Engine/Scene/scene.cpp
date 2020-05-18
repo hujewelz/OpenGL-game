@@ -3,23 +3,18 @@
 
 #include <iostream>
 
-Scene *Scene::Create()
-{
-    return new Scene();
-}
-
 Scene::Scene()
 {
 }
 
 Scene::~Scene()
 {
-    delete render;
+    delete renderer_;
 }
 
 void Scene::AddChild(const Sprite &sprite)
 {
-    this->children.push_back(sprite);
+    this->children_.push_back(sprite);
 }
 
 void Scene::Init()
@@ -27,10 +22,10 @@ void Scene::Init()
 
     Shader shader = ResourceManager::CreateShader("./Resources/core.vs", "./Resources/core.fs", "Breakout");
     shader.Use();
-    render = new SpriteRenderer(shader);
+    renderer_ = new SpriteRenderer(shader);
 
     // TODO: create all texture form sprites
-    for (Sprite &sprite : children)
+    for (Sprite &sprite : children_)
     {
         sprite.LoadTexture(shader);
     }
@@ -40,8 +35,8 @@ void Scene::Init()
 void Scene::Render()
 {
     // TODO: Load text form sprites
-    for (Sprite &sprite : children)
+    for (Sprite &sprite : children_)
     {
-        render->Render(sprite);
+        renderer_->Render(sprite);
     }
 }
