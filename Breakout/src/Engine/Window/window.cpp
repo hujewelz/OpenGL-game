@@ -16,8 +16,8 @@ Window::~Window()
 
 void Window::RunScene(Scene &scene)
 {
-    this->scene_ = scene;
-    this->Init();
+    scene_ = scene;
+    Init();
 }
 
 void Window::Init()
