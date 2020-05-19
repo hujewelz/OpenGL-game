@@ -3,16 +3,22 @@
 
 #include <iostream>
 
-Sprite::Sprite(const std::string file_name, const bet::vec2 &position, const bet::vec2 &size)
-    : file_name_(file_name), position_(position), size_(size), scale_(1.0f), rotate_(0.0f)
-{
-}
+Sprite::Sprite(
+    const std::string file_name,
+    const bet::vec2 &position,
+    const bet::vec2 &size)
+    : file_name_(file_name),
+      position_(position),
+      size_(size),
+      scale_(1.0f),
+      rotate_(0.0f) {}
 
-Sprite::Sprite() : file_name_(nullptr), scale_(1.0f), rotate_(0.0f)
-{
-    position_ = bet::vec2(0.0f, 0.0f);
-    size_ = bet::vec2(0.0f, 0.0f);
-}
+Sprite::Sprite()
+    : file_name_(nullptr),
+      position_(0.0f, 0.0f),
+      size_(0.0f, 0.0f),
+      scale_(1.0f),
+      rotate_(0.0f) {}
 
 Sprite::~Sprite() {}
 
