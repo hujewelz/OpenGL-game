@@ -3,41 +3,39 @@
 
 namespace bet
 {
-    template <typename T>
-    struct vec2
+struct vec2
+{
+    float x;
+    float y;
+
+    vec2() : x(0), y(0){};
+    vec2(float x_, float y_) : x(x_), y(y_){};
+
+    vec2 operator+(const vec2 &v) const
     {
-        T x;
-        T y;
+        return vec2(x + v.x, y + v.y);
+    }
 
-        vec2() : x(), y(){};
-        vec2(const T x_, const T y_) : x(x_), y(y_){};
-        // vec2(const vec2<T> &v) : x(v.x), y(v.y){};
+    vec2 operator-(const vec2 &v) const
+    {
+        return vec2(x - v.x, y - v.y);
+    }
 
-        vec2 &operator+(const vec2 &v) const
-        {
-            return vec2(x + v.x, y + v.y);
-        }
+    vec2 operator*(const vec2 &v) const
+    {
+        return vec2(x * v.x, y * v.y);
+    }
 
-        vec2 &operator-(const vec2 &v) const
-        {
-            return vec2(x - v.x, y - v.y);
-        }
+    vec2 operator/(const vec2 &v) const
+    {
+        return vec2(x / v.x, y / v.y);
+    }
 
-        vec2 &operator*(const vec2 &v) const
-        {
-            return vec2(x * v.x, y * v.y);
-        }
-
-        vec2 &operator/(const vec2 &v) const
-        {
-            return vec2(x / v.x, y / v.y);
-        }
-
-        bool operator==(const vec2 &v) const
-        {
-            return x == v.x && y == v.y;
-        }
-    };
+    bool operator==(const vec2 &v) const
+    {
+        return x == v.x && y == v.y;
+    }
+};
 
 } // namespace bet
 

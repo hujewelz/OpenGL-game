@@ -5,43 +5,42 @@
 
 namespace bet
 {
-    template <typename T>
-    struct vec3
+struct vec3
+{
+    float x;
+    float y;
+    float z;
+
+    vec3();
+    vec3(float x_, float y_, float z_) : x(x_), y(y_), z(z_){};
+    vec3(const vec3 &v) : x(v.x), y(v.y), z(v.z){};
+    vec3(const vec2 &v, float z_) : x(v.x), y(v.y), z(z_){};
+
+    vec3 operator+(const vec3 &v) const
     {
-        T x;
-        T y;
-        T z;
+        return vec3(x + v.x, y + v.y, z + v.z);
+    }
 
-        vec3();
-        vec3(const T x_, const T y_, const T z_) : x(x_), y(y_), z(z_){};
-        vec3(const vec3<T> &v) : x(v.x), y(v.y), z(v.z){};
-        vec3(const vec2<T> &v, T z_) : x(v.x), y(v.y), z(z_){};
+    vec3 operator-(const vec3 &v) const
+    {
+        return vec3(x - v.x, y - v.y, z - v.z);
+    }
 
-        vec3 &operator+(const vec3 &v) const
-        {
-            return vec3(x + v.x, y + v.y, z + v.z);
-        }
+    vec3 operator*(const vec3 &v) const
+    {
+        return vec3(x * v.x, y * v.y, z * v.z);
+    }
 
-        vec3 &operator-(const vec3 &v) const
-        {
-            return vec3(x - v.x, y - v.y, z - v.z);
-        }
+    vec3 operator/(const vec3 &v) const
+    {
+        return vec3(x / v.x, y / v.y, z / v.z);
+    }
 
-        vec3 &operator*(const vec3 &v) const
-        {
-            return vec3(x * v.x, y * v.y, z * v.z);
-        }
-
-        vec3 &operator/(const vec3 &v) const
-        {
-            return vec3(x / v.x, y / v.y, z / v.z);
-        }
-
-        bool operator==(const vec3 &v) const
-        {
-            return x == v.x && y == v.y && z == v.z;
-        }
-    };
+    bool operator==(const vec3 &v) const
+    {
+        return x == v.x && y == v.y && z == v.z;
+    }
+};
 
 } // namespace bet
 
