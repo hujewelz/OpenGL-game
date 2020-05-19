@@ -11,7 +11,7 @@ class Sprite
 {
 public:
     Sprite();
-    Sprite(const std::string file_name, const bet::vec2<float> &position, const bet::vec2<float> &size);
+    Sprite(const std::string file_name, const bet::vec2 &position, const bet::vec2 &size);
     ~Sprite();
 
     Texture2D GetTexture() const;
@@ -19,15 +19,15 @@ public:
     void LoadTexture(Shader &shader);
 
     const std::string &GetFileName() const { return this->file_name_; };
-    const bet::vec2<float> &GetPosition() const { return this->position_; }
-    const bet::vec2<float> &GetSize() const { return this->size_; }
+    const bet::vec2 &GetPosition() const { return this->position_; }
+    const bet::vec2 &GetSize() const { return this->size_; }
     float GetScale() const { return this->scale_; }
     float GetRatate() const { return this->rotate_; }
 
 private:
     std::string file_name_;
-    bet::vec2<float> position_;
-    bet::vec2<float> size_;
+    bet::vec2 position_;
+    bet::vec2 size_;
     float scale_;
     float rotate_;
 };
