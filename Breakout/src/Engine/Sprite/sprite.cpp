@@ -33,3 +33,23 @@ Texture2D Sprite::GetTexture() const
 {
     return ResourceManager::GetTexture2D("Demo");
 }
+
+void Sprite::SetPosition(const bet::vec2 &position)
+{
+    position_ = position;
+}
+
+void Sprite::SetSize(const bet::vec2 &size)
+{
+    size_ = size;
+}
+
+void Sprite::SetScale(const float scale)
+{
+    scale_ = scale;
+}
+
+void Sprite::SetRotate(const float rotate)
+{
+    rotate_ = rotate;
+}
