@@ -12,20 +12,20 @@ public:
     // binds the texture as the current active GL_TEXTURE_2D texture object
     void Bind() const;
 
-    GLuint GetID() const { return this->ID_; }
+    GLuint GetID() const { return ID_; }
 
     // return the format of texture object
-    unsigned int GetInternalFormat() const { return this->internal_format_; }
+    unsigned int GetInternalFormat() const { return internal_format_; }
     // return the format of loaded image
-    unsigned int GetImageFormat() const { return this->image_format_; }
+    unsigned int GetImageFormat() const { return image_format_; }
     // return wrapping mode on S axis
-    unsigned int GetWrapS() const { return this->wrap_s_; }
+    unsigned int GetWrapS() const { return wrap_s_; }
     // return wrapping mode on T axis
-    unsigned int GetWrapT() const { return this->wrap_t_; }
+    unsigned int GetWrapT() const { return wrap_t_; }
     // return filtering mode when texture pixels < screen pixels
-    unsigned int GetFilterMin() const { return this->filter_min_; }
+    unsigned int GetFilterMin() const { return filter_min_; }
     // return filering mode when texture pixels > screen pixels
-    unsigned int GetFilterMax() const { return this->filter_max_; }
+    unsigned int GetFilterMax() const { return filter_max_; }
 
     // set the format of texture object
     void SetInternalFormat(unsigned int tex_format);

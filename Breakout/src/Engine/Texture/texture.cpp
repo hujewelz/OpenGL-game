@@ -4,7 +4,7 @@ Texture2D::Texture2D()
     : width_(0), height_(0), internal_format_(GL_RGB), image_format_(GL_RGB),
       wrap_s_(GL_REPEAT), wrap_t_(GL_REPEAT), filter_min_(GL_LINEAR), filter_max_(GL_LINEAR)
 {
-    glGenTextures(1, &this->ID_);
+    glGenTextures(1, &ID_);
 }
 
 void Texture2D::Generate(int width, int height, const unsigned char *data)
