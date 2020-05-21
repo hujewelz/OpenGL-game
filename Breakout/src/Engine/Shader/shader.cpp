@@ -4,6 +4,8 @@
 #include <sstream>
 #include <iostream>
 
+#include <glm/gtc/type_ptr.hpp>
+
 Shader::Shader(const char *vShaderPath, const char *fShaderPath)
 {
     LinkShader(vShaderPath, fShaderPath);
@@ -54,6 +56,13 @@ void Shader::SetVector4f(const char *name, float x, float y, float z, float w, b
     if (useShader)
         Use();
     glUniform4f(glGetUniformLocation(program_, name), x, y, z, w);
+}
+
+void Shader::SetMatrix4(const char *name, const glm::mat4 mat, bool userShader = false)
+{
+    if (userShader)
+        Use();
+    glUniformMatrix4fv(glGetUniformLocation(program_, name), glm::value_ptr(mat));
 }
 
 void Shader::LinkShader(const char *vShaderPath, const char *fShaderPath)
