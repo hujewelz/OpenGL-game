@@ -22,7 +22,14 @@ void SpriteRenderer::Render(Sprite &sprite)
     shader_.Use();
     glm::mat4 model = glm::mat4(1.0f);
     // TODO: set model and projection for shader
-    // model = glm::translate(model, glm::vec3(sprite.GetPosition().x, sprite.GetPosition().y, 0.0f));
+    model = glm::translate(model, glm::vec3(sprite.GetPosition().x, sprite.GetPosition().y, 0.0f));
+
+    model = glm::translate(model, glm::vec3(0.5f * sprite.GetSize().x, 0.5f * sprite.GetSize().y, 0.0f));
+    model = glm::rotate(model, sprite.GetRotate(), glm::vec3(0.0f, 0.0f, -1.0f));
+    model = glm::translate(model, glm::vec3(-0.5f * sprite.GetSize().x, -0.5f * sprite.GetSize().y, 0.0f));
+    model = glm::scale(model, glm::vec3(sprite.GetSize().x, sprite.GetSize().y, 1.0f));
+
+    shader_.SetMatrix4("model", model);
 
     glActiveTexture(GL_TEXTURE0);
     sprite.GetTexture().Bind();
