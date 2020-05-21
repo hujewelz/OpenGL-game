@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+// #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 Scene::Scene()
 {
 }
@@ -22,6 +25,10 @@ void Scene::Init()
 
     Shader shader = ResourceManager::CreateShader("./Resources/core.vs", "./Resources/core.fs", "Breakout");
     shader.Use();
+    // set projection
+    glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(600), static_cast<GLfloat>(800), 0.0f, -1.0f, 1.0f);
+    shader.SetInt("image", 0);
+    shader.SetMatrix4("projection", projection);
     renderer_ = new SpriteRenderer(shader);
 
     // TODO: create all texture form sprites
@@ -29,7 +36,6 @@ void Scene::Init()
     {
         sprite.LoadTexture(shader);
     }
-    shader.SetInt("image", 0);
 }
 
 void Scene::Render()
