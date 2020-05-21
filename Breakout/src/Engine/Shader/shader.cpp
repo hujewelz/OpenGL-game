@@ -58,11 +58,11 @@ void Shader::SetVector4f(const char *name, float x, float y, float z, float w, b
     glUniform4f(glGetUniformLocation(program_, name), x, y, z, w);
 }
 
-void Shader::SetMatrix4(const char *name, const glm::mat4 mat, bool userShader = false)
+void Shader::SetMatrix4(const char *name, const glm::mat4 &mat, bool userShader)
 {
     if (userShader)
         Use();
-    glUniformMatrix4fv(glGetUniformLocation(program_, name), glm::value_ptr(mat));
+    glUniformMatrix4fv(glGetUniformLocation(program_, name), 1, GL_FALSE, &mat[0][0]);
 }
 
 void Shader::LinkShader(const char *vShaderPath, const char *fShaderPath)
