@@ -23,7 +23,7 @@ public:
     static Texture2D GetTexture2D(const std::string name);
 
     // deallocates all loaded resources
-    static void clear();
+    static void Clear();
 
 private:
     ResourceManager() {}
