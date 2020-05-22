@@ -6,9 +6,10 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-Shader::Shader(const char *vShaderPath, const char *fShaderPath)
+Shader::Shader(const std::string &vShaderPath, const std::string &fShaderPath)
 {
-    LinkShader(vShaderPath, fShaderPath);
+    v_shader_path_ = vShaderPath;
+    f_shader_path_ = fShaderPath;
 }
 
 Shader::Shader() {}
@@ -65,11 +66,11 @@ void Shader::SetMatrix4(const char *name, const glm::mat4 &mat, bool userShader)
     glUniformMatrix4fv(glGetUniformLocation(program_, name), 1, GL_FALSE, &mat[0][0]);
 }
 
-void Shader::LinkShader(const char *vShaderPath, const char *fShaderPath)
+void Shader::LinkShader()
 {
     program_ = glCreateProgram();
-    GLuint vertexShader = CompileSharder(vShaderPath, GL_VERTEX_SHADER);
-    GLuint fragmentShader = CompileSharder(fShaderPath, GL_FRAGMENT_SHADER);
+    GLuint vertexShader = CompileSharder(v_shader_path_, GL_VERTEX_SHADER);
+    GLuint fragmentShader = CompileSharder(f_shader_path_, GL_FRAGMENT_SHADER);
     glAttachShader(program_, vertexShader);
     glAttachShader(program_, fragmentShader);
 
@@ -79,7 +80,7 @@ void Shader::LinkShader(const char *vShaderPath, const char *fShaderPath)
     glDeleteShader(fragmentShader);
 }
 
-GLuint Shader::CompileSharder(const char *shaderpath, GLenum type)
+GLuint Shader::CompileSharder(const std::string &shaderpath, GLenum type)
 {
     std::string sCode;
     std::ifstream shaderFile;

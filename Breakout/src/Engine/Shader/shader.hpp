@@ -1,6 +1,8 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include <string>
+
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
@@ -8,11 +10,12 @@ class Shader
 {
 public:
     Shader();
-    Shader(const char *vShaderPath, const char *fShaderPath);
+    Shader(const std::string &vShaderPath, const std::string &fShaderPath);
     ~Shader();
     void Use();
 
     GLuint GetProgram() const { return program_; }
+    void LinkShader();
 
     // utility functions
     void SetInt(const char *name, int value, bool useShader = false);
@@ -25,8 +28,9 @@ public:
 
 private:
     GLuint program_;
-    void LinkShader(const char *vShaderPath, const char *fShaderPath);
-    GLuint CompileSharder(const char *shaderpath, GLenum type);
+    std::string v_shader_path_;
+    std::string f_shader_path_;
+    GLuint CompileSharder(const std::string &shaderpath, GLenum type);
 };
 
 #endif
