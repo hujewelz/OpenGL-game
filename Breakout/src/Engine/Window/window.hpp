@@ -27,6 +27,7 @@ private:
     void Init();
     void Render();
     void ProcessInput(GLFWwindow *window);
+    void FramebufferSizeChanged(GLFWwindow *window, int width, int height);
     void Update();
 };
 

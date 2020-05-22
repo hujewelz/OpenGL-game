@@ -43,8 +43,10 @@ void Window::Init()
         return;
     }
     glfwMakeContextCurrent(window);
-    // glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+    // typedef void *(*Callback)(void *, GLFWwindow *, int, int);
+    // Callback callback = (Callback) & (Window::FramebufferSizeChanged);
+    // glfwSetFramebufferSizeCallback(window, callback);
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
     {
@@ -58,15 +60,16 @@ void Window::Init()
     // render loop
     while (!glfwWindowShouldClose(window))
     {
-        glfwPollEvents();
         ProcessInput(window);
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         Render();
-        glfwSwapBuffers(window);
-    }
 
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+    ResourceManager::Clear();
     // glfw: terminate, clearing all previously allocated GLFW resources.
     glfwTerminate();
 }
@@ -76,6 +79,15 @@ void Window::Update()
 
 void Window::ProcessInput(GLFWwindow *window)
 {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
+void Window::FramebufferSizeChanged(GLFWwindow *window, int width, int height)
+{
+    width_ = width;
+    height_ = height;
+    glViewport(0, 0, width, height);
 }
 
 void Window::Render()
