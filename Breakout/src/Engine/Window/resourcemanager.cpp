@@ -8,10 +8,12 @@
 std::map<std::string, Shader> ResourceManager::shaders_;
 std::map<std::string, Texture2D> ResourceManager::textures_;
 
-Shader ResourceManager::CreateShader(const char *vShaderPath, const char *fShaderPath, std::string name)
+Shader ResourceManager::CreateShader(const std::string &vShaderPath, const std::string &fShaderPath, std::string name)
 {
-    shaders_[name] = Shader(vShaderPath, fShaderPath);
-    return shaders_[name];
+    Shader s(vShaderPath, fShaderPath);
+    s.LinkShader();
+    shaders_[name] = s;
+    return s;
 }
 
 Shader ResourceManager::GetShader(const std::string name)
@@ -19,15 +21,16 @@ Shader ResourceManager::GetShader(const std::string name)
     return shaders_[name];
 }
 
-Texture2D ResourceManager::CreateTexture2D(const char *file, bool alpha, const std::string name)
+Texture2D ResourceManager::CreateTexture2D(const std::string &file, bool alpha)
 {
+    const std::string name = GetFileName(file);
     textures_[name] = loadTextureFromFile(file, alpha);
-    ;
     return textures_[name];
 }
 
-Texture2D ResourceManager::GetTexture2D(const std::string name)
+Texture2D ResourceManager::GetTexture2D(const std::string &file)
 {
+    const std::string name = GetFileName(file);
     return textures_[name];
 }
 
@@ -51,7 +54,7 @@ const std::string ResourceManager::GetFileName(const std::string &file)
     return std::to_string(hash_str(file));
 }
 
-Texture2D ResourceManager::loadTextureFromFile(const char *filename, bool alpha)
+Texture2D ResourceManager::loadTextureFromFile(const std::string &filename, bool alpha)
 {
     Texture2D texture;
     if (alpha)
@@ -62,7 +65,7 @@ Texture2D ResourceManager::loadTextureFromFile(const char *filename, bool alpha)
 
     // load image
     int width, height, nrChanels;
-    unsigned char *data = stbi_load(filename, &width, &height, &nrChanels, 0);
+    unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrChanels, 0);
     // std::cout << "Load texture from file: " << texture.GetID() << std::endl;
     if (data)
     {
