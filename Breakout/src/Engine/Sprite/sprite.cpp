@@ -24,14 +24,13 @@ Sprite::~Sprite() {}
 
 void Sprite::LoadTexture(Shader &shader)
 {
-    // shader.Use();
-    ResourceManager::CreateTexture2D(file_name_.c_str(), false, "Demo");
+    ResourceManager::CreateTexture2D(file_name_, false);
     shader.SetVector3f("spriteColor", 1.0f, 0.0f, 0.0f);
 }
 
 Texture2D Sprite::GetTexture() const
 {
-    return ResourceManager::GetTexture2D("Demo");
+    return ResourceManager::GetTexture2D(file_name_);
 }
 
 void Sprite::SetPosition(const bet::vec2 &position)
