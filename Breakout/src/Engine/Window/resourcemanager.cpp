@@ -10,6 +10,14 @@ std::map<std::string, Texture2D> ResourceManager::textures_;
 
 Shader ResourceManager::CreateShader(const std::string &vShaderPath, const std::string &fShaderPath, std::string name)
 {
+    std::cout << "CreateShader" << std::endl;
+    // std::map<std::string, Shader>::iterator iter = shaders_.find(name);
+    // if (iter != shaders_.end())
+    // {
+    //     std::cout << "Shader: " << shaders_[name].GetProgram() << std::endl;
+    //     return shaders_[name];
+    // }
+
     Shader s(vShaderPath, fShaderPath);
     s.LinkShader();
     shaders_[name] = s;
@@ -24,6 +32,13 @@ Shader ResourceManager::GetShader(const std::string name)
 Texture2D ResourceManager::CreateTexture2D(const std::string &file, bool alpha)
 {
     const std::string name = GetFileName(file);
+    // load texture from cache first.
+    std::map<std::string, Texture2D>::iterator iter = textures_.find(name);
+    if (iter != textures_.end())
+    {
+        // std::cout << "Create texture: " << textures_[name].GetID() << std::endl;
+        return textures_[name];
+    }
     textures_[name] = loadTextureFromFile(file, alpha);
     return textures_[name];
 }
