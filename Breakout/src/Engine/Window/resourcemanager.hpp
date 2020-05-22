@@ -21,6 +21,7 @@ public:
     static Texture2D CreateTexture2D(const char *file, bool alpha, std::string name);
     // retrieves a stored texture
     static Texture2D GetTexture2D(const std::string name);
+    static const std::string GetFileName(const std::string &file);
 
     // deallocates all loaded resources
     static void Clear();

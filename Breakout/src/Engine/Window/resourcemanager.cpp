@@ -2,6 +2,7 @@
 #include "stb_image.h"
 
 #include <iostream>
+#include <functional>
 
 // Instantiate static variables
 std::map<std::string, Shader> ResourceManager::shaders_;
@@ -9,9 +10,8 @@ std::map<std::string, Texture2D> ResourceManager::textures_;
 
 Shader ResourceManager::CreateShader(const char *vShaderPath, const char *fShaderPath, std::string name)
 {
-    Shader s = Shader(vShaderPath, fShaderPath);
-    shaders_[name] = s;
-    return s;
+    shaders_[name] = Shader(vShaderPath, fShaderPath);
+    return shaders_[name];
 }
 
 Shader ResourceManager::GetShader(const std::string name)
@@ -21,9 +21,9 @@ Shader ResourceManager::GetShader(const std::string name)
 
 Texture2D ResourceManager::CreateTexture2D(const char *file, bool alpha, const std::string name)
 {
-    Texture2D t = loadTextureFromFile(file, alpha);
-    textures_[name] = t;
-    return t;
+    textures_[name] = loadTextureFromFile(file, alpha);
+    ;
+    return textures_[name];
 }
 
 Texture2D ResourceManager::GetTexture2D(const std::string name)
@@ -43,6 +43,12 @@ void ResourceManager::Clear()
         GLuint tex = iter.second.GetID();
         glDeleteTextures(1, &tex);
     }
+}
+
+const std::string ResourceManager::GetFileName(const std::string &file)
+{
+    std::hash<std::string> hash_str;
+    return std::to_string(hash_str(file));
 }
 
 Texture2D ResourceManager::loadTextureFromFile(const char *filename, bool alpha)
