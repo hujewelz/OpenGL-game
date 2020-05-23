@@ -54,7 +54,6 @@ void Window::Init()
         return;
     }
 
-    // TODO: Add Scene
     scene_.Init();
 
     // render loop

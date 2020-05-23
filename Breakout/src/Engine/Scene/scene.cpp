@@ -31,7 +31,6 @@ void Scene::Init()
     shader.SetMatrix4("projection", projection);
     renderer_ = new SpriteRenderer(shader);
 
-    // TODO: create all texture form sprites
     for (Sprite &sprite : children_)
     {
         sprite.LoadTexture(shader);
@@ -40,7 +39,6 @@ void Scene::Init()
 
 void Scene::Render()
 {
-    // TODO: Load text form sprites
     for (Sprite &sprite : children_)
     {
         renderer_->Render(sprite);
