@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 Sprite::Sprite(
     const std::string file_name,
     const bet::vec2 &position,
@@ -11,21 +14,22 @@ Sprite::Sprite(
       position_(position),
       size_(size),
       scale_(1.0f),
-      rotate_(0.0f) {}
+      rotate_(0.0f),
+      color_(1.0f, 1.0f, 1.0f) {}
 
 Sprite::Sprite()
     : file_name_(nullptr),
       position_(0.0f, 0.0f),
       size_(0.0f, 0.0f),
       scale_(1.0f),
-      rotate_(0.0f) {}
+      rotate_(0.0f),
+      color_(1.0f, 1.0f, 1.0f) {}
 
 Sprite::~Sprite() {}
 
 void Sprite::LoadTexture(Shader &shader)
 {
     ResourceManager::CreateTexture2D(file_name_, false);
-    shader.SetVector3f("spriteColor", 1.0f, 0.0f, 0.0f);
 }
 
 Texture2D Sprite::GetTexture() const
@@ -51,4 +55,9 @@ void Sprite::SetScale(const float scale)
 void Sprite::SetRotate(const float rotate)
 {
     rotate_ = rotate;
+}
+
+void Sprite::SetColor(const bet::vec3 &color)
+{
+    color_ = color;
 }

@@ -33,8 +33,7 @@ Texture2D ResourceManager::CreateTexture2D(const std::string &file, bool alpha)
 {
     const std::string name = GetFileName(file);
     // load texture from cache first.
-    std::map<std::string, Texture2D>::iterator iter = textures_.find(name);
-    if (iter != textures_.end())
+    if (textures_.count(name))
     {
         // std::cout << "Create texture: " << textures_[name].GetID() << std::endl;
         return textures_[name];
