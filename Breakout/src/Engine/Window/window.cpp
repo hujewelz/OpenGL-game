@@ -79,8 +79,11 @@ void Window::Update()
 
 void Window::ProcessInput(GLFWwindow *window)
 {
-    // if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-    // glfwSetWindowShouldClose(window, true);
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
+        glfwSetWindowShouldClose(window, true);
+        return;
+    }
     Event event;
     for (EventHandler &handler : eventHandlers_)
     {
@@ -108,12 +111,13 @@ void Window::Render()
 void Window::AddEventHandler(Key key, EventState state, EventHandlerFun handler)
 {
     EventHandler h(Event(key, state), handler);
+    eventHandlers_.push_back(h);
 }
 
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
-{
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-    auto k = static_cast<Key>(key);
-    Event e(k, static_cast<EventState>(action));
-}
+// void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
+// {
+//     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+//         glfwSetWindowShouldClose(window, true);
+//     auto k = static_cast<Key>(key);
+//     Event e(k, static_cast<EventState>(action));
+// }

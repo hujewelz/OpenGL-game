@@ -15,6 +15,11 @@ int main(int argc, char *arge[])
     scene.AddChild(sprite2);
 
     Window window(500, 600, "Breakout");
+
+    window.AddEventHandler(KEY_A, EVENT_STATE_PRESS, [&sprite](Event event) {
+        bet::vec2 p = sprite.GetPosition();
+        sprite.SetPosition(p + bet::vec2(10.0f, 10.0f));
+    });
     window.RunScene(scene);
 
     return 1;
