@@ -27,6 +27,11 @@ Sprite::Sprite()
 
 Sprite::~Sprite() {}
 
+Sprite *Sprite::Create(const std::string file_name, const bet::vec2 &position, const bet::vec2 &size)
+{
+    return new Sprite(file_name, position, size);
+}
+
 void Sprite::LoadTexture(Shader &shader)
 {
     ResourceManager::CreateTexture2D(file_name_, false);

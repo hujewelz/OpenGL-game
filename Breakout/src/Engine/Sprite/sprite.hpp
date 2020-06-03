@@ -10,9 +10,9 @@
 class Sprite
 {
 public:
-    Sprite();
-    Sprite(const std::string file_name, const bet::vec2 &position, const bet::vec2 &size);
     ~Sprite();
+
+    static Sprite *Create(const std::string file_name, const bet::vec2 &position, const bet::vec2 &size);
 
     Texture2D GetTexture() const;
 
@@ -32,6 +32,8 @@ public:
     void SetColor(const bet::vec3 &color);
 
 private:
+    Sprite();
+    Sprite(const std::string file_name, const bet::vec2 &position, const bet::vec2 &size);
     std::string file_name_;
     bet::vec2 position_;
     bet::vec2 size_;

@@ -19,11 +19,11 @@ public:
     // render all sprites
     void Render();
 
-    void AddChild(const Sprite &sprite);
+    void AddChild(Sprite *sprite);
 
 private:
     SpriteRenderer *renderer_;
-    std::vector<Sprite> children_;
+    std::vector<Sprite *> children_;
 };
 
 #endif

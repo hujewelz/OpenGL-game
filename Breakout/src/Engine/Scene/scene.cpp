@@ -13,9 +13,13 @@ Scene::Scene()
 Scene::~Scene()
 {
     delete renderer_;
+    for (auto child : children_)
+    {
+        delete child;
+    }
 }
 
-void Scene::AddChild(const Sprite &sprite)
+void Scene::AddChild(Sprite *sprite)
 {
     children_.push_back(sprite);
 }
@@ -31,16 +35,16 @@ void Scene::Init()
     shader.SetMatrix4("projection", projection);
     renderer_ = new SpriteRenderer(shader);
 
-    for (Sprite &sprite : children_)
+    for (Sprite *sprite : children_)
     {
-        sprite.LoadTexture(shader);
+        sprite->LoadTexture(shader);
     }
 }
 
 void Scene::Render()
 {
-    for (Sprite &sprite : children_)
+    for (Sprite *sprite : children_)
     {
-        renderer_->Render(sprite);
+        renderer_->Render(*sprite);
     }
 }
