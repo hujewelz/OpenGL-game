@@ -12,7 +12,7 @@ class Sprite
 public:
     ~Sprite();
 
-    static Sprite *Create(const std::string file_name, const bet::vec2 &position, const bet::vec2 &size);
+    static Sprite *Create(const std::string file_name, const bet::Rect rect);
 
     Texture2D GetTexture() const;
 

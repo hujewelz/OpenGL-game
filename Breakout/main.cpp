@@ -7,9 +7,9 @@
 
 int main(int argc, char *arge[])
 {
-    Sprite *sprite = Sprite::Create("./Resources/demo.jpg", bet::vec2(200.0f, 200.0f), bet::vec2(40.0f, 40.0f));
+    Sprite *sprite = Sprite::Create("./Resources/demo.jpg", bet::Rect(200.0f, 200.0f, 40.0f, 40.0f));
 
-    Sprite *sprite2 = Sprite::Create("./Resources/demo.jpg", bet::vec2(400.0f, 200.0f), bet::vec2(100.0f, 100.0f));
+    Sprite *sprite2 = Sprite::Create("./Resources/demo.jpg", bet::Rect(400.0f, 200.0f, 100.0f, 100.0f));
     Scene scene;
     scene.AddChild(sprite);
     scene.AddChild(sprite2);

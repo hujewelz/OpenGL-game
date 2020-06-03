@@ -27,9 +27,9 @@ Sprite::Sprite()
 
 Sprite::~Sprite() {}
 
-Sprite *Sprite::Create(const std::string file_name, const bet::vec2 &position, const bet::vec2 &size)
+Sprite *Sprite::Create(const std::string file_name, const bet::Rect rect)
 {
-    return new Sprite(file_name, position, size);
+    return new Sprite(file_name, rect.origin, rect.size);
 }
 
 void Sprite::LoadTexture(Shader &shader)
