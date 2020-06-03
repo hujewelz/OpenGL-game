@@ -3,18 +3,18 @@
 
 enum Key
 {
-    Key_0 = 0
+    kUnknownKey = -1,
+    kKey_0 = 0
 };
 
 enum EventState
 {
+    kStateDefault = -1,
     // The key or mouse button was released
-    Release = 0,
+    kRelease = 0,
     // The key or mouse button was pressed
-    Press
+    kPress
 };
-
-typedef void (*EventHandlerFun)(Event &event);
 
 struct Event
 {
@@ -22,21 +22,20 @@ struct Event
     EventState state;
 
     Event(Key key_, EventState state_) : key(key_), state(state_) {}
-    Event(){};
+    Event() : key(kUnknownKey), state(kStateDefault){};
+    ~Event() {}
 };
 
-class EventHandler
+typedef void (*EventHandlerFun)(Event event);
+
+struct EventHandler
 {
-public:
-    EventHandler(Event event, EventHandlerFun handler_);
-    ~EventHandler();
+    EventHandler(Event event_, EventHandlerFun handler_) : event(event_), handler(handler_) {}
+    EventHandler() : event(kUnknownKey, kStateDefault), handler(nullptr) {}
+    ~EventHandler(){};
 
-    Event GetEvent() { return event_; }
-    EventHandlerFun Handler() { return handler_; }
-
-private:
-    Event event_;
-    EventHandlerFun handler_;
+    Event event;
+    EventHandlerFun handler;
 };
 
 #endif

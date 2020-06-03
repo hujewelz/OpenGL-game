@@ -84,11 +84,11 @@ void Window::ProcessInput(GLFWwindow *window)
     Event event;
     for (EventHandler &handler : eventHandlers_)
     {
-        event = handler.GetEvent();
+        event = handler.event;
         // 根据 KEY 和 State 获取其处理事件
         if (glfwGetKey(window, event.key) == event.state)
         {
-            handler.Handler()(event);
+            handler.handler(event);
         }
     }
 }
