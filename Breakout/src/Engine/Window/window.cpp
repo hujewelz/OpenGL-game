@@ -47,6 +47,7 @@ void Window::Init()
     // typedef void *(*Callback)(void *, GLFWwindow *, int, int);
     // Callback callback = (Callback) & (Window::FramebufferSizeChanged);
     // glfwSetFramebufferSizeCallback(window, callback);
+    // glfwSetKeyCallback
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
     {
@@ -59,6 +60,7 @@ void Window::Init()
     // render loop
     while (!glfwWindowShouldClose(window))
     {
+        glfwPollEvents();
         ProcessInput(window);
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -66,7 +68,6 @@ void Window::Init()
         Render();
 
         glfwSwapBuffers(window);
-        glfwPollEvents();
     }
     ResourceManager::Clear();
     // glfw: terminate, clearing all previously allocated GLFW resources.
@@ -78,8 +79,18 @@ void Window::Update()
 
 void Window::ProcessInput(GLFWwindow *window)
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+    // if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    // glfwSetWindowShouldClose(window, true);
+    Event event;
+    for (EventHandler &handler : eventHandlers_)
+    {
+        event = handler.GetEvent();
+        // 根据 KEY 和 State 获取其处理事件
+        if (glfwGetKey(window, event.key) == event.state)
+        {
+            handler.Handler()(event);
+        }
+    }
 }
 
 void Window::FramebufferSizeChanged(GLFWwindow *window, int width, int height)
@@ -92,4 +103,17 @@ void Window::FramebufferSizeChanged(GLFWwindow *window, int width, int height)
 void Window::Render()
 {
     scene_.Render();
+}
+
+void Window::AddEventHandler(Key key, EventState state, EventHandlerFun handler)
+{
+    EventHandler h(Event(key, state), handler);
+}
+
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
+{
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+    auto k = static_cast<Key>(key);
+    Event e(k, static_cast<EventState>(action));
 }

@@ -6,6 +6,7 @@
 
 #include "spriterenderer.hpp"
 #include "scene.hpp"
+#include "event.hpp"
 
 class Window
 {
@@ -18,6 +19,8 @@ public:
     int GetWidth() const { return width_; }
     int GetHeight() const { return height_; }
 
+    void AddEventHandler(Key key, EventState state, EventHandlerFun handler);
+
 private:
     int width_;
     int height_;
@@ -29,6 +32,8 @@ private:
     void ProcessInput(GLFWwindow *window);
     void FramebufferSizeChanged(GLFWwindow *window, int width, int height);
     void Update();
+
+    std::vector<EventHandler> eventHandlers_;
 };
 
 #endif
